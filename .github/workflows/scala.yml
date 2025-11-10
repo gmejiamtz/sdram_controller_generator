@@ -23,6 +23,8 @@ jobs:
         with:
           java-version: "11"
           distribution: "temurin"
+      - name: Install sbt
+        uses: sbt/setup-sbt@v1
       - name: Check Formatting
         working-directory: sdram_controller_gen
         run: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck
