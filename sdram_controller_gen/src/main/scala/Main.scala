@@ -1,7 +1,8 @@
 import play.api.libs.json._
 import java.io.File
 import scala.sys.process._
-import chisel3.stage.ChiselStage
+import chisel3._
+import _root_.circt.stage.ChiselStage
 import sdram_general._
 import sva._
 
@@ -44,9 +45,9 @@ object SDRAMController_Generate {
     val opcode = 0
     val write_burst = 0
     val params = new SDRAMControllerParams(resultMap, self_refresh)
-    val chiselStage = new ChiselStage
-    //called SDRAMController.v
-    chiselStage.emitVerilog(new SDRAMController(params), args)
+    //val chiselStage = new ChiselStage
+    //called SDRAMController.sv
+    ChiselStage.emitSystemVerilogFile(new SDRAMController(params), args)
     val curr_dir = System.getProperty("user.dir")
     //val formal_verify = true;
     val rm_formal_proc = Process(s"rm -rf $curr_dir/src/test/formal")
